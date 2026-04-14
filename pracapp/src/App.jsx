@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+
+// Import all our custom components
+import Navbar from './components/Navbar';
 import Projects from './components/Projects';
-import AnimatedHeader from './components/AnimatedHeader'; // <-- Import it here
+import AnimatedHeader from './components/AnimatedHeader';
+import HorizontalScroll from './components/HorizontalScroll';
+import CardStack from './components/CardStack';
+import Footer from './components/Footer'; // <-- Import the new footer
+
 import './index.css';
 
 gsap.registerPlugin(useGSAP);
@@ -37,38 +44,44 @@ export default function App() {
 
   return (
     <>
+      {/* SCENE 1: LOADING SCREEN */}
       <div className="loader-container">
         <div className="follow"></div>
         <div className="progress-bar hide-loader" style={{ width: count + '%' }}></div>
         <p className="count hide-loader">{count}%</p>
       </div>
 
-      <ReactLenis root options={{ lerp: 0.05 }}>
+      <ReactLenis root options={{ lerp: 0.05, smoothWheel: true }}>
         <main>
           {isRevealed && (
             <>
-              {/* Top Space
-              <div style={{ height: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <h2 style={{ fontSize: '2rem', color: '#fff' }}>Scroll Down</h2>
-              </div> */}
-              
-              {/* The Expanding Image Grid */}
-              <Projects />
-
-              {/* The New Awwwards Text Animations */}
-              <div style={{ padding: '50px', display: 'flex', flexDirection: 'column', gap: '30vh' }}>
+              {/* EVERY SCROLLING COMPONENT GOES INSIDE THIS WRAPPER */}
+              {/* This wrapper has the 80vh margin-bottom! */}
+              <div className="content-wrapper">
                 
-                <AnimatedHeader 
-                  text="We Build Digital" 
-                  animateOnScroll={true} 
-                />
+                {/* SCENE 2: EXPANDING NAVBAR */}
+                <Navbar />
                 
-                <AnimatedHeader 
-                  text="Experiences That Inspire" 
-                  scrub={true} // This one will tie directly to the scrollbar!
-                />
+                {/* SCENE 3: FIGHTING FOR SPACE GRID */}
+                <Projects />
 
+                {/* SCENE 4: AWWWARDS TEXT REVEAL */}
+                <div style={{ padding: '20vh 5vw', display: 'flex', flexDirection: 'column', gap: '30vh', minHeight: '100vh' }}>
+                  <AnimatedHeader text="We Build Digital" animateOnScroll={true} />
+                  <AnimatedHeader text="Experiences That Inspire" scrub={true} />
+                </div>
+
+                {/* SCENE 5: HORIZONTAL SCROLL GALLERY */}
+                <HorizontalScroll />
+
+                {/* SCENE 6: THE STACKING QUOTE CARDS */}
+                <CardStack />
+                
               </div>
+
+              {/* SCENE 7: THE STICKY FOOTER */}
+              {/* This sits outside the wrapper, stuck to the bottom of the window waiting to be revealed */}
+              <Footer />
             </>
           )}
         </main>
