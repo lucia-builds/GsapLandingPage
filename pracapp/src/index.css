@@ -1,0 +1,38 @@
+.projects-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+  padding: 100px 0;
+  overflow: hidden; /* Prevent horizontal scroll */
+  background: #050505;
+}
+
+.project-row {
+  display: flex;
+  gap: 2vw;
+  width: 125%; /* Starting compressed width */
+  justify-content: center;
+  will-change: width; /* Optimization for animation */
+}
+
+.project-card {
+  flex: 1;
+  aspect-ratio: 16/9;
+  background: #1a1a1a;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+.project-card:hover img {
+  filter: grayscale(0%);
+}
