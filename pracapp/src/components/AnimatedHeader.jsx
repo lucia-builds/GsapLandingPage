@@ -16,18 +16,14 @@ export default function AnimatedHeader({
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    // Target all the individual character spans
     const chars = gsap.utils.toArray('.animated-header-char', containerRef.current);
     if (chars.length === 0) return;
 
-    // 1. Set the initial "hidden" state exactly like the video
     gsap.set(chars, { 
       x: 100, 
       opacity: 0, 
       skewX: 20 
     });
-
-    // 2. Define the animation
     const animateIn = () => {
       return gsap.to(chars, {
         x: 0,
@@ -40,9 +36,8 @@ export default function AnimatedHeader({
       });
     };
 
-    // 3. Handle the Variants (Page Load vs. Scroll vs. Scrub)
+    //Text reveal animation
     if (scrub) {
-      // Ties the text reveal perfectly to your scrollbar
       gsap.to(chars, {
         x: 0,
         opacity: 1,
@@ -57,20 +52,17 @@ export default function AnimatedHeader({
         }
       });
     } else if (animateOnScroll) {
-      // Triggers the animation once it enters the viewport
       ScrollTrigger.create({
         trigger: containerRef.current,
-        start: "top 85%", // Starts when top of text hits 85% of screen height
+        start: "top 85%",
         onEnter: () => animateIn().restart(),
-        onLeaveBack: () => gsap.set(chars, { x: 100, opacity: 0, skewX: 20 }) // Resets if you scroll up
+        onLeaveBack: () => gsap.set(chars, { x: 100, opacity: 0, skewX: 20 }) // 
       });
     } else {
-      // Default: Animate immediately on page load
       animateIn();
     }
   }, { scope: containerRef });
 
-  // Helper function to split text into words and characters safely
   return (
     <h1 ref={containerRef} style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', fontWeight: 900, textTransform: 'uppercase', margin: 0 }}>
       {text.split(' ').map((word, wordIndex) => (

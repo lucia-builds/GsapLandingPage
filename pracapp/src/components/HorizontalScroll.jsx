@@ -79,7 +79,7 @@ export default function HorizontalScroll() {
       });
     });
 
-    // ── Hover reveal animations ──────────────────────────────
+   //Hover animation reveal
     cards.forEach((card) => {
       const overlay   = card.querySelector('.card-overlay');
       const category  = card.querySelector('.card-category');
@@ -89,7 +89,6 @@ export default function HorizontalScroll() {
       const arrow     = card.querySelector('.card-arrow');
       const img       = card.querySelector('img');
 
-      // Set initial states
       gsap.set(overlay,  { opacity: 0 });
       gsap.set(category, { y: 20, opacity: 0 });
       gsap.set(title,    { y: 40, opacity: 0 });

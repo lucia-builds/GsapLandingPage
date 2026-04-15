@@ -37,8 +37,6 @@ export default function Projects() {
   useGSAP(() => {
     const rows = rowsRef.current;
     const section = containerRef.current;
-    
-    // Calculate how much space the container needs
     const calculateLayout = () => {
       const isMobile = window.innerWidth < 850;
       const startWidth = isMobile ? 200 : 125;
@@ -61,8 +59,6 @@ export default function Projects() {
 
     const { startWidth, endWidth } = calculateLayout();
     window.addEventListener('resize', calculateLayout);
-
-    // Update width based on scroll progress
     const updateWidths = () => {
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
@@ -102,11 +98,9 @@ export default function Projects() {
           ref={el => rowsRef.current[rowIndex] = el}
         >
           
-          {/* Generate 6 Images per Row */}
+          {/*Generate images in a row */}
           {Array.from({ length: 6 }).map((_, colIndex) => {
             
-            // This math ensures we loop through your array continuously 
-            // no matter how many images you provided.
             const imageIndex = (rowIndex * 6 + colIndex) % myCustomImages.length;
             const imageUrl = myCustomImages[imageIndex];
 

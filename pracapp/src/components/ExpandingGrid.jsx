@@ -27,13 +27,10 @@ export default function ExpandingGrid() {
 
     return () => ctx.revert();
   }, []);
-
-  // Generate 10 rows, with 9 items per row (just like the video)
   const rows = Array.from({ length: 10 });
   const items = Array.from({ length: 9 });
 
   return (
-    // overflow: 'hidden' is CRITICAL here so the 500% width doesn't cause a horizontal scrollbar
     <div ref={containerRef} style={{ background: '#0a0a0a', padding: '20vh 0', overflow: 'hidden', minHeight: '100vh' }}>
       
       {/* Intro text spacer */}
@@ -47,7 +44,7 @@ export default function ExpandingGrid() {
           ref={(el) => (rowsRef.current[rowIndex] = el)}
           style={{
             display: 'flex',
-            width: '125%', // Starts slightly compressed
+            width: '125%', 
             gap: '2vw',
             marginBottom: '2vw',
             justifyContent: 'center'
@@ -57,15 +54,15 @@ export default function ExpandingGrid() {
             <div
               key={itemIndex}
               style={{
-                flex: 1, // Ensures all items share the row width equally
-                aspectRatio: '7/5', // Keeps the shape consistent as it grows
-                backgroundColor: '#222', // Placeholder background
+                flex: 1, 
+                aspectRatio: '7/5', 
+                backgroundColor: '#222',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 position: 'relative'
               }}
             >
-              {/* You can replace this img tag with your actual project images */}
+            
               <img 
                 src={`https://picsum.photos/seed/${rowIndex * 10 + itemIndex}/600/400`} 
                 alt="Project" 

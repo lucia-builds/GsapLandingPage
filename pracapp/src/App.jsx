@@ -3,13 +3,14 @@ import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-// Import all our custom components
 import Navbar from './components/Navbar';
 import Projects from './components/Projects';
 import AnimatedHeader from './components/AnimatedHeader';
+import ImpactMetrics from './components/ImpactMetrics';
 import HorizontalScroll from './components/HorizontalScroll';
 import CardStack from './components/CardStack';
-import Footer from './components/Footer'; // <-- Import the new footer
+import StarryBackground from './components/StarryBackground';
+import Footer from './components/Footer'; 
 
 import './index.css';
 
@@ -44,7 +45,6 @@ export default function App() {
 
   return (
     <>
-      {/* SCENE 1: LOADING SCREEN */}
       <div className="loader-container">
         <div className="follow"></div>
         <div className="progress-bar hide-loader" style={{ width: count + '%' }}></div>
@@ -55,32 +55,28 @@ export default function App() {
         <main>
           {isRevealed && (
             <>
-              {/* EVERY SCROLLING COMPONENT GOES INSIDE THIS WRAPPER */}
-              {/* This wrapper has the 80vh margin-bottom! */}
               <div className="content-wrapper">
-                
-                {/* SCENE 2: EXPANDING NAVBAR */}
+                <StarryBackground />
                 <Navbar />
-                
-                {/* SCENE 3: FIGHTING FOR SPACE GRID */}
                 <Projects />
 
-                {/* SCENE 4: AWWWARDS TEXT REVEAL */}
-                <div style={{ padding: '20vh 5vw', display: 'flex', flexDirection: 'column', gap: '30vh', minHeight: '100vh' }}>
-                  <AnimatedHeader text="We Build Digital" animateOnScroll={true} />
-                  <AnimatedHeader text="Experiences That Inspire" scrub={true} />
+                <div
+                  style={{
+                    padding: '20vh 5vw',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '30vh',
+                    minHeight: '100vh',
+                  }}
+                >
+                  <AnimatedHeader text="Welcome to Itzfizz" animateOnScroll={true} />
+                  <ImpactMetrics />
                 </div>
-
-                {/* SCENE 5: HORIZONTAL SCROLL GALLERY */}
                 <HorizontalScroll />
-
-                {/* SCENE 6: THE STACKING QUOTE CARDS */}
+   <AnimatedHeader  text="What Our Customers Say" animateOnScroll={true}/>
                 <CardStack />
-                
               </div>
-
-              {/* SCENE 7: THE STICKY FOOTER */}
-              {/* This sits outside the wrapper, stuck to the bottom of the window waiting to be revealed */}
+              <div className="footer-spacer" aria-hidden="true" />
               <Footer />
             </>
           )}
